@@ -14,7 +14,7 @@ port = [8000]
 def send_msg(role, text):
     try:
         data = {"role": role, "text": text}
-        response = requests.post(f"http://127.0.0.1:{port[-1]}/send_message", json=data)
+        response = requests.post(f"http://0.0.0.0:{port[-1]}/send_message", json=data)
     except:
         logging.info("flask app.py did not start for online log")
 
@@ -65,4 +65,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     port.append(args.port)
     print(f"Please visit http://127.0.0.1:{port[-1]}/ for the front-end display page. \nIn the event of a port conflict, please modify the port argument (e.g., python3 app.py --port 8012).")
-    app.run(debug=False, port=port[-1])
+    app.run(debug=False, port=port[-1], host="0.0.0.0")
